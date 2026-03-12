@@ -1,0 +1,49 @@
+###
+GET http://localhost:3000/usuarios
+###
+POST http://localhost:3000/usuarios
+Content-Type: application/json
+
+{
+ "nome": "Gabriel",
+ "senha": "12345"
+}
+
+###
+PUT http://localhost:3000/usuarios/4
+Content-Type: application/json
+
+{
+ "nome": "Leonel",
+ "senha": "leaf green"
+}
+
+###
+DELETE http://localhost:3000/usuarios/3
+
+
+
+###
+GET http://localhost:3000/filmes
+###
+POST http://localhost:3000/filmes
+Content-Type: application/json
+
+{
+ "titulo": "vingadores",
+ "genero": "ação",
+ "ano_lancamento":"2000"
+}
+
+###
+PUT http://localhost:3000/filmes/4
+Content-Type: application/json
+
+{
+"titulo": "toy story",
+ "genero": "infantil",
+ "ano_lancamento":"1980"
+}
+
+###
+DELETE http://localhost:3000/filmes/3
