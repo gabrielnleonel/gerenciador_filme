@@ -67,18 +67,18 @@ servidor.get('/filmes', async (request, reply) => {
 })
 
 servidor.post('/filmes', async (request, reply) => {
- const { titulo, genero , ano_lancamento} = request.body;
- if (!titulo || !genero || !ano_lancamento) {
+ const { titulo, genero , ano_lancamento, diretor} = request.body;
+ if (!titulo || !genero || !ano_lancamento || !diretor) {
  return reply.status(400).send({ error: 'Informações do filme inválidas!' })
  }
- await sql.query('INSERT INTO filmes (titulo, genero , ano_lancamento) VALUES ($1, $2, $3)', [titulo, genero , ano_lancamento])
+ await sql.query('INSERT INTO filmes (titulo, genero , ano_lancamento, diretor) VALUES ($1, $2, $3, $4)', [titulo, genero , ano_lancamento, diretor])
  return reply.status(201).send({ mensagem: "Filme cadastrado com sucesso!" })
 })
 
 servidor.put('/filmes/:id', async (request, reply) => {
  const { id } = request.params
- const { titulo, genero , ano_lancamento } = request.body
- if (!titulo || !genero || !ano_lancamento) {
+ const { titulo, genero, ano_lancamento, diretor} = request.body
+ if (!titulo || !genero || !ano_lancamento || !diretor) {
  return reply.status(400).send({ error: 'Informações do filme inválidas!' })
  }
  const busca = await sql.query('SELECT * FROM filmes WHERE id = $1', [id])
@@ -86,7 +86,7 @@ servidor.put('/filmes/:id', async (request, reply) => {
  if (busca.rows.length === 0) {
  return reply.status(404).send({ error: 'Filme não encontrado!' })
  }
- await sql.query('UPDATE filmes SET nome = $1, genero = $2 WHERE id = $3', [titulo, genero , ano_lancamento, id])
+ await sql.query('UPDATE filmes SET titulo = $1, genero = $2, ano_lancamento = $3, diretor = $4 WHERE id = $5', [titulo, genero , ano_lancamento, diretor, id])
  return { mensagem: 'Filme alterado com sucesso!' }
 })
 
